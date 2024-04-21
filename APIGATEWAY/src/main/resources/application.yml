@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: eCommerce-apiGateway
+  cloud:
+    gateway:
+
+server:
+  port: 8082
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka
+    register-with-eureka: true
+
+
