@@ -3,15 +3,14 @@ package com.ecommerce.authenticationservice.entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-
+@Table(name="users")
 @Entity
-@Table(name="user")
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
     @Id
-    @Column(name="userId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="userid")
     private Long userId;
     @Column(name="name")
     private String name;
