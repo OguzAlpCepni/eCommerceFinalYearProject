@@ -23,7 +23,7 @@ public class AuthenticationManager implements AuthenticationService {
         User user = this.modelMapperService.forRequest().map(userDTO,User.class);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         this.userRepository.save(user);
-        return "başarılı";
+        return "user added to the system";
     }
 
     @Override
