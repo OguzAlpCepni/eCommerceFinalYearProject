@@ -18,6 +18,7 @@ public class AuthenticationManager implements AuthenticationService {
     private PasswordEncoder passwordEncoder;
     private JWTService jwtService;
 
+
     @Override
     public String saveUser(UserDTO userDTO) {
         User user = this.modelMapperService.forRequest().map(userDTO,User.class);

@@ -3,6 +3,11 @@ spring:
     name: eCommerce-apiGateway
   cloud:
     gateway:
+      routes:
+        - id: AuthenticationService
+          uri: lb://AuthenticationService
+          predicates:
+            - Path=/auth/**
 
 server:
   port: 8083
