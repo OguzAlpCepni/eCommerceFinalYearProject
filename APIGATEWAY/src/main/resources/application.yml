@@ -8,6 +8,8 @@ spring:
           uri: lb://AuthenticationService
           predicates:
             - Path=/auth/**
+          filters:
+            - AuthenticationFilter
 
 server:
   port: 8083
