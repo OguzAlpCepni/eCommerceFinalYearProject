@@ -65,4 +65,5 @@ public class ProductEntity {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
 }
