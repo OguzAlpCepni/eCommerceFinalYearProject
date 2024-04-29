@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface ProductService {
      List<ProductDto> findAll();
-     ProductDto findById(int id);
+     ProductDto findById(Long id);
      void add(CreateProductDto createProductDto);
-     void update(UpdateProductDto UpdateProductDto);
-     void delete(int id);
+     void update(UpdateProductDto updateProductDto);
+     void delete(Long id);
 
 }
