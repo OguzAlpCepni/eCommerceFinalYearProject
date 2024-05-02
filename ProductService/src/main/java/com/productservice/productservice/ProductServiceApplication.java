@@ -2,14 +2,20 @@ package com.productservice.productservice;
 
 import com.productservice.productservice.core.exceptions.BusinessException;
 import com.productservice.productservice.core.exceptions.ProblemDetails;
+import com.productservice.productservice.core.exceptions.ValidationProblemDetails;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.HashMap;
+@RestControllerAdvice
 @SpringBootApplication
 public class ProductServiceApplication {
 
@@ -28,6 +34,16 @@ public class ProductServiceApplication {
         problemDetails.setMessage(businessException.getMessage());
         return problemDetails;
 
-
+    }
+    @ExceptionHandler
+    @ResponseStatus(code =HttpStatus.BAD_REQUEST)
+    public ProblemDetails handleValidationException(MethodArgumentNotValidException methodArgumentNotValidException){
+        ValidationProblemDetails validationProblemDetails = new ValidationProblemDetails();
+        validationProblemDetails.setMessage("Validation exceptions");
+        validationProblemDetails.setValidationErrors(new HashMap<String,String>());
+        for(FieldError fieldError : methodArgumentNotValidException.getBindingResult().getFieldErrors()) {
+            validationProblemDetails.getValidationErrors().put(fieldError.getField(), fieldError.getDefaultMessage());
+        }
+        return validationProblemDetails;
     }
 }

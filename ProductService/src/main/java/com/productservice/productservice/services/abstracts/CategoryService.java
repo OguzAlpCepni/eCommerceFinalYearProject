@@ -5,7 +5,6 @@ package com.productservice.productservice.services.abstracts;
 import com.productservice.productservice.services.DTO.CategoryDto;
 import com.productservice.productservice.services.DTO.CreateCategoryDto;
 import com.productservice.productservice.services.DTO.UpdateCategoryDto;
-import jdk.jfr.Category;
 
 import java.util.List;
 

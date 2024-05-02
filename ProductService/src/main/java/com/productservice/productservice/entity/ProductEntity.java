@@ -66,4 +66,11 @@ public class ProductEntity {
         this.quantity = quantity;
     }
 
+    public CategoryEntity getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryEntity category) {
+        this.category = category;
+    }
 }

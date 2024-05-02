@@ -55,8 +55,8 @@ public class ProductManager implements ProductService {
 
     @Override
     public void delete(Long id) {
-
-        log.info("*** Void, service; delete product by id *");this.productRepository.deleteById(id);
+        log.info("*** Void, service; delete product by id *");
+        this.productRepository.deleteById(id);
     }
 
 
