@@ -9,14 +9,14 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-@RestController
+@Slf4j
+@Controller
 @AllArgsConstructor
 @RequestMapping("/product")
-@Slf4j
 public class ProductController {
     private ProductService productService;
 
