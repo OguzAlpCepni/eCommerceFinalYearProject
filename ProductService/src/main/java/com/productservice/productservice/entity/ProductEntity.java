@@ -22,7 +22,7 @@ public class ProductEntity {
     private double priceUnit;
     @Column(name="quantity")
     private int quantity;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "categoryid")
     private CategoryEntity categoryEntity;
 
