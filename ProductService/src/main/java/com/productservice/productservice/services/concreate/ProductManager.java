@@ -4,6 +4,7 @@ import com.productservice.productservice.core.mapper.ModelMapperService;
 import com.productservice.productservice.entity.ProductEntity;
 import com.productservice.productservice.repository.ProductRepository;
 import com.productservice.productservice.services.DTO.CreateProductDto;
+import com.productservice.productservice.services.DTO.GetAllProductDto;
 import com.productservice.productservice.services.DTO.ProductDto;
 import com.productservice.productservice.services.DTO.UpdateProductDto;
 import com.productservice.productservice.services.abstracts.ProductService;
@@ -23,11 +24,11 @@ public class ProductManager implements ProductService {
     private ModelMapperService modelMapperService;
     private ProductServiceRules productServiceRules;
     @Override
-    public List<ProductDto> findAll() {
+    public List<GetAllProductDto> findAll() {
         log.info("*** ProductDto List, service; fetch all products *");
         List<ProductEntity> productEntities = productRepository.findAll();
-        List<ProductDto> productDtos = productEntities.stream().map(productEntity -> this.modelMapperService.forResponse().map(productEntity,ProductDto.class)).collect(Collectors.toList());
-        return productDtos;
+        List<GetAllProductDto> getAllProductDtos = productEntities.stream().map(productEntity -> this.modelMapperService.forResponse().map(productEntity,GetAllProductDto.class)).collect(Collectors.toList());
+        return getAllProductDtos;
     }
 
     @Override

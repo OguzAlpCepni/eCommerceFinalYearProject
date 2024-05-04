@@ -22,9 +22,9 @@ public class ProductEntity {
     private double priceUnit;
     @Column(name="quantity")
     private int quantity;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "categoryid")
-    private CategoryEntity category;
+    private CategoryEntity categoryEntity;
 
     public Long getProductId() {
         return productId;
@@ -67,10 +67,10 @@ public class ProductEntity {
     }
 
     public CategoryEntity getCategory() {
-        return category;
+        return categoryEntity;
     }
 
     public void setCategory(CategoryEntity category) {
-        this.category = category;
+        this.categoryEntity = category;
     }
 }

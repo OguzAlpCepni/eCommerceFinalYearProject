@@ -5,6 +5,7 @@ import com.productservice.productservice.entity.CategoryEntity;
 import com.productservice.productservice.repository.CategoryRepository;
 import com.productservice.productservice.services.DTO.CategoryDto;
 import com.productservice.productservice.services.DTO.CreateCategoryDto;
+import com.productservice.productservice.services.DTO.GetAllCategoryDto;
 import com.productservice.productservice.services.DTO.UpdateCategoryDto;
 import com.productservice.productservice.services.abstracts.CategoryService;
 import com.productservice.productservice.services.helper.CategoryServiceRules;
@@ -24,11 +25,11 @@ public class CategoryManager implements CategoryService {
     private CategoryServiceRules categoryServiceRules;
 
     @Override
-    public List<CategoryDto> findAll() {
+    public List<GetAllCategoryDto> findAll() {
         log.info("*** CategoryDto List, service; fetch all categorys *");
         List<CategoryEntity> categoryEntities = this.categoryRepository.findAll();
-        List<CategoryDto> categoryDtos = categoryEntities.stream().map(categoryEntity -> this.modelMapperService.forResponse().map(categoryEntity,CategoryDto.class)).collect(Collectors.toList());
-        return categoryDtos;
+        List<GetAllCategoryDto> getAllCategoryDto = categoryEntities.stream().map(categoryEntity -> this.modelMapperService.forResponse().map(categoryEntity,GetAllCategoryDto.class)).collect(Collectors.toList());
+        return getAllCategoryDto;
     }
 
     @Override

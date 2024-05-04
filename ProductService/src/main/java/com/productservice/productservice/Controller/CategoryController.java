@@ -2,6 +2,7 @@ package com.productservice.productservice.Controller;
 
 import com.productservice.productservice.services.DTO.CategoryDto;
 import com.productservice.productservice.services.DTO.CreateCategoryDto;
+import com.productservice.productservice.services.DTO.GetAllCategoryDto;
 import com.productservice.productservice.services.DTO.UpdateCategoryDto;
 import com.productservice.productservice.services.abstracts.CategoryService;
 import jakarta.validation.Valid;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @AllArgsConstructor
 @RequestMapping("/category")
 public class CategoryController {
@@ -23,9 +24,8 @@ public class CategoryController {
 
     @GetMapping
     public ResponseEntity findAllCategory(){
-
-        List<CategoryDto> categoryDtoList = this.categoryService.findAll();
-        return ResponseEntity.ok(categoryDtoList);
+        List<GetAllCategoryDto> getAllCategoryDto = this.categoryService.findAll();
+        return ResponseEntity.ok(getAllCategoryDto);
     }
     @GetMapping("/{categoryid}")
     public ResponseEntity findById(@PathVariable("categoryid") int id){

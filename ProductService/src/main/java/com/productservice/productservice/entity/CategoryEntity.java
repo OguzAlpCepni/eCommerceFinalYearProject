@@ -17,8 +17,8 @@ public class CategoryEntity {
     private int categoryId;
     @Column(name="categorytitle")
     private String categoryTitle;
-    @JsonIgnore
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "categoryEntity")
     private List<ProductEntity> productEntities;
 
     public int getCategoryId() {

@@ -1,6 +1,7 @@
 package com.productservice.productservice.Controller;
 
 import com.productservice.productservice.services.DTO.CreateProductDto;
+import com.productservice.productservice.services.DTO.GetAllProductDto;
 import com.productservice.productservice.services.DTO.ProductDto;
 import com.productservice.productservice.services.DTO.UpdateProductDto;
 import com.productservice.productservice.services.abstracts.ProductService;
@@ -14,17 +15,18 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @Slf4j
-@Controller
+@RestController
 @AllArgsConstructor
 @RequestMapping("/product")
+
 public class ProductController {
     private ProductService productService;
 
     @GetMapping
     public ResponseEntity findAllProducts(){
         log.info("* fetch all products");
-        List<ProductDto> productDtoList = this.productService.findAll();
-        return ResponseEntity.ok(productDtoList);
+        List<GetAllProductDto> getAllProductDtos = this.productService.findAll();
+        return ResponseEntity.ok(getAllProductDtos);
     }
     @GetMapping("/{productid}")
     public ResponseEntity findById(@PathVariable("categoryid") @NotBlank(message = "input must not be blank") @Valid Long id){
