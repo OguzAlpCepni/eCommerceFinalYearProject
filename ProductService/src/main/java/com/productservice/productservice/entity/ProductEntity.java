@@ -1,13 +1,20 @@
 package com.productservice.productservice.entity;
 
+
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="product")
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class ProductEntity {
 
     @Id
@@ -22,55 +29,9 @@ public class ProductEntity {
     private double priceUnit;
     @Column(name="quantity")
     private int quantity;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "categoryid")
+
+    @ManyToOne
+    @JoinColumn(name ="categoryid")
     private CategoryEntity categoryEntity;
 
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
-
-    public String getProductTitle() {
-        return productTitle;
-    }
-
-    public void setProductTitle(String productTitle) {
-        this.productTitle = productTitle;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public double getPriceUnit() {
-        return priceUnit;
-    }
-
-    public void setPriceUnit(double priceUnit) {
-        this.priceUnit = priceUnit;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public CategoryEntity getCategory() {
-        return categoryEntity;
-    }
-
-    public void setCategory(CategoryEntity category) {
-        this.categoryEntity = category;
-    }
 }

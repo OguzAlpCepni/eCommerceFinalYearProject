@@ -29,7 +29,7 @@ public class ProductController {
         return ResponseEntity.ok(getAllProductDtos);
     }
     @GetMapping("/{productid}")
-    public ResponseEntity findById(@PathVariable("categoryid") @NotBlank(message = "input must not be blank") @Valid Long id){
+    public ResponseEntity findById(@PathVariable("productid")  Long id){
         log.info("fetch product by id");
          ProductDto productDto = this.productService.findById(id);
          return ResponseEntity.ok(productDto);
@@ -53,7 +53,7 @@ public class ProductController {
         return ResponseEntity.ok("update product by id");
     }
     @DeleteMapping("/{productid}")
-    public ResponseEntity delete(Long id){
+    public ResponseEntity delete(@PathVariable("productid") Long id){
         log.info("product deleted");
         this.productService.delete(id);
         return ResponseEntity.ok("product deleted");

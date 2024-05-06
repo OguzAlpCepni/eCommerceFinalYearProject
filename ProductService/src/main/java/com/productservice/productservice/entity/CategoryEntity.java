@@ -1,8 +1,10 @@
 package com.productservice.productservice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
@@ -10,6 +12,7 @@ import java.util.List;
 @Table(name="category")
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class CategoryEntity {
     @Id
     @Column(name="categoryid")
@@ -18,30 +21,8 @@ public class CategoryEntity {
     @Column(name="categorytitle")
     private String categoryTitle;
 
-    @OneToMany(mappedBy = "categoryEntity",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "categoryEntity")
     private List<ProductEntity> productEntities;
 
-    public int getCategoryId() {
-        return categoryId;
-    }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public String getCategoryTitle() {
-        return categoryTitle;
-    }
-
-    public void setCategoryTitle(String categoryTitle) {
-        this.categoryTitle = categoryTitle;
-    }
-
-    public List<ProductEntity> getProductEntities() {
-        return productEntities;
-    }
-
-    public void setProductEntities(List<ProductEntity> productEntities) {
-        this.productEntities = productEntities;
-    }
 }

@@ -1,8 +1,12 @@
 package com.productservice.productservice.services.DTO;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductDto {
     private Long productId;
     private String productTitle;
@@ -12,7 +16,6 @@ public class ProductDto {
     private double priceUnit;
 
     private int quantity;
-    @JsonProperty("category")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+
     private CategoryDto categoryDto;
 }

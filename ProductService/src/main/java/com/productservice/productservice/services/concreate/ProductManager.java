@@ -1,17 +1,21 @@
 package com.productservice.productservice.services.concreate;
 
 import com.productservice.productservice.core.mapper.ModelMapperService;
+import com.productservice.productservice.entity.CategoryEntity;
 import com.productservice.productservice.entity.ProductEntity;
+import com.productservice.productservice.repository.CategoryRepository;
 import com.productservice.productservice.repository.ProductRepository;
 import com.productservice.productservice.services.DTO.CreateProductDto;
 import com.productservice.productservice.services.DTO.GetAllProductDto;
 import com.productservice.productservice.services.DTO.ProductDto;
 import com.productservice.productservice.services.DTO.UpdateProductDto;
+import com.productservice.productservice.services.abstracts.CategoryService;
 import com.productservice.productservice.services.abstracts.ProductService;
 import com.productservice.productservice.services.helper.ProductServiceRules;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +27,7 @@ public class ProductManager implements ProductService {
     private ProductRepository productRepository;
     private ModelMapperService modelMapperService;
     private ProductServiceRules productServiceRules;
+
     @Override
     public List<GetAllProductDto> findAll() {
         log.info("*** ProductDto List, service; fetch all products *");
@@ -44,6 +49,8 @@ public class ProductManager implements ProductService {
         log.info("*** ProductDto, service; save product *");
         productServiceRules.checkIfProductExists(createProductDto.getProductTitle());
         ProductEntity productEntity = this.modelMapperService.forRequest().map(createProductDto,ProductEntity.class);
+        //CategoryEntity categoryEntity = categoryRepository.findById(createProductDto.getCategoryid()).orElseThrow();
+        //productEntity.setCategoryEntity(categoryEntity);
         this.productRepository.save(productEntity);
     }
 

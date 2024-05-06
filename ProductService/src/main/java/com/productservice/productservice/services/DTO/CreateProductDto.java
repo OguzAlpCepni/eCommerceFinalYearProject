@@ -1,6 +1,8 @@
 package com.productservice.productservice.services.DTO;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.productservice.productservice.entity.CategoryEntity;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -25,5 +27,6 @@ public class CreateProductDto {
     @Positive
     private int quantity;
 
-    private int categoryId;
+    @NotNull
+    private CategoryEntity categoryEntity;
 }

@@ -37,7 +37,8 @@ public class CategoryManager implements CategoryService {
         log.info("*** CategoryDto, service; fetch category by id *");
         CategoryEntity categoryEntity = this.categoryRepository.findById(id).orElseThrow();
         CategoryDto categoryDto = this.modelMapperService.forResponse().map(categoryEntity,CategoryDto.class);
-        return null;
+
+        return categoryDto;
     }
 
 

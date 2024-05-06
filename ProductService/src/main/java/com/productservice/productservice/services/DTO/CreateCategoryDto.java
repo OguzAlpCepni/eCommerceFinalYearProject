@@ -7,9 +7,7 @@ import lombok.Data;
 import java.util.List;
 @Data
 public class CreateCategoryDto {
-    private int categoryId;
-
+    @NotNull
     private String categoryTitle;
 
-    private List<ProductDto> productDtos;
 }
