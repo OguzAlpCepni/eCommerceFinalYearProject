@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="EurekaServer-Registry" />
+        <module name="ShippingService" />
         <module name="AuthenticationService" />
         <module name="APIGATEWAY" />
         <module name="ProductService" />
@@ -18,6 +19,7 @@
       <module name="EurekaServer-Registry" target="17" />
       <module name="klmnksa" target="17" />
       <module name="ProductService" target="17" />
+      <module name="ShippingService" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -26,6 +28,7 @@
       <module name="AuthenticationService" options="-parameters" />
       <module name="EurekaServer-Registry" options="-parameters" />
       <module name="ProductService" options="-parameters" />
+      <module name="ShippingService" options="-parameters" />
       <module name="klmnksa" options="-parameters" />
     </option>
   </component>
