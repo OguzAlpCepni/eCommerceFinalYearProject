@@ -11,14 +11,12 @@ spring:
           filters:
             - AuthenticationFilter
 
-
         - id: ProductService
           uri: lb://ProductService
           predicates:
             - Path=/product/**
           filters:
             - AuthenticationFilter
-
 
         - id: ProductService
           uri: lb://ProductService
