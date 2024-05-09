@@ -5,16 +5,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Table(name="basketitem")
+@Table(name="item")
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BasketItem {
+public class ItemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="basketitemid")
-    private Long basketItemId;
+    @Column(name="itemid")
+    private Long itemId;
     @Column(name ="itemsku")
     private long itemsku;
 
