@@ -20,7 +20,8 @@ public class CreateProductDto {
     private String productTitle;
     @NotNull
     private String imageUrl;
-
+    @Positive
+    private Long itemsku;
     @Positive
     private double priceUnit;
 

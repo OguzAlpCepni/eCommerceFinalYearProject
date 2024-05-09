@@ -13,6 +13,7 @@ public class GetAllProductDto {
     private String productTitle;
 
     private String imageUrl;
+    private Long itemsku;
 
     private double priceUnit;
 

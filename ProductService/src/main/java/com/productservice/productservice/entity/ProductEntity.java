@@ -25,6 +25,8 @@ public class ProductEntity {
     private String productTitle;
     @Column(name="imageurl")
     private String imageUrl;
+    @Column(name="itemsku")
+    private Long itemsku;
     @Column(name="priceunit")
     private double priceUnit;
     @Column(name="quantity")

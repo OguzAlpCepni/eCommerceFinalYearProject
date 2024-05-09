@@ -22,6 +22,8 @@ public class UpdateProductDto {
 
     private String imageUrl;
     @Positive
+    private Long itemsku;
+    @Positive
     private double priceUnit;
     @Positive
     private int quantity;
