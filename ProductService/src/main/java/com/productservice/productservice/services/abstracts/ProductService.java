@@ -15,5 +15,6 @@ public interface ProductService {
      void update(UpdateProductDto updateProductDto);
      void delete(Long id);
      void updateById(Long productId,UpdateProductDto updateProductDto);
+     ProductDto findByItemSku(long id);
 
 }

@@ -1,7 +1,6 @@
 package com.ecommerce.shippingservice.service.concreate;
 
 import com.ecommerce.shippingservice.Entity.ShippingEntity;
-import com.ecommerce.shippingservice.core.feignClient.ShippingFeignClient;
 import com.ecommerce.shippingservice.core.mappers.ModelMapperService;
 import com.ecommerce.shippingservice.repository.ShippingRepository;
 import com.ecommerce.shippingservice.service.DTO.GetAllShippingDto;

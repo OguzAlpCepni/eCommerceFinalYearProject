@@ -11,11 +11,14 @@ public class BasketItemEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long basketItemId;
 
+    @Column(name = "baskedid")
     private long basketId;
 
     @OneToOne
+    @Column(name = "iitem")
     private ItemEntity item;
 
+    @Column(name = "quantity")
     private int quantity;
 
     public BasketItemEntity() {

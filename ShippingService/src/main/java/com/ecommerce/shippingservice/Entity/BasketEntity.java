@@ -21,10 +21,12 @@ public class BasketEntity {
     private Long basketId;
     @OneToMany
     private Collection<BasketItemEntity> basketItems = new ArrayList<>();
+    @Column(name = "basketstatus")
     private BasketStatus basketStatus;
 
+    @Column(name = "created")
     private DateTime created;
-
+    @Column(name = "baskedError")
     private BasketError basketError;
     public BasketEntity() {
     }

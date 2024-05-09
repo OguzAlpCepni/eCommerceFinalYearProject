@@ -28,12 +28,12 @@ public class ProductController {
         List<GetAllProductDto> getAllProductDtos = this.productService.findAll();
         return ResponseEntity.ok(getAllProductDtos);
     }
-    @GetMapping("/{productid}")
+    /*@GetMapping("/{productid}")
     public ResponseEntity findById(@PathVariable("productid")  Long id){
         log.info("fetch product by id");
          ProductDto productDto = this.productService.findById(id);
          return ResponseEntity.ok(productDto);
-    }
+    }*/
     @PostMapping
     public ResponseEntity addProduct(@RequestBody @Valid CreateProductDto createProductDto){
         log.info("add product");
@@ -57,6 +57,12 @@ public class ProductController {
         log.info("product deleted");
         this.productService.delete(id);
         return ResponseEntity.ok("product deleted");
+    }
+    @GetMapping("/{itemsku}")
+    public ResponseEntity findByItemSku(@PathVariable("itemsku")  Long itemsku){
+        log.info("fetch product by itemsku");
+        ProductDto productDto = this.productService.findByItemSku(itemsku);
+        return ResponseEntity.ok(productDto);
     }
 
 }

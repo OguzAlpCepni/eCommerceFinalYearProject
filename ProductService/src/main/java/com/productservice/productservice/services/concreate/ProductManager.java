@@ -75,4 +75,12 @@ public class ProductManager implements ProductService {
         this.productRepository.deleteById(productId);
         this.productRepository.save(productEntitynNew);
     }
+
+    @Override
+    public ProductDto findByItemSku(long itemsku) {
+        log.info("*** ProductDto, service; fetch product by itemsku *");
+        ProductEntity productEntity = this.productRepository.findByitemsku(itemsku).orElseThrow();
+        ProductDto productDto = this.modelMapperService.forResponse().map(productEntity,ProductDto.class);
+        return productDto;
+    }
 }
