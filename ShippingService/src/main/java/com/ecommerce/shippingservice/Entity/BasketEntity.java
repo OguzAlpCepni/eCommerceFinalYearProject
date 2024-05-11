@@ -3,9 +3,7 @@ package com.ecommerce.shippingservice.Entity;
 import com.ecommerce.shippingservice.core.util.BasketError;
 import com.ecommerce.shippingservice.core.util.BasketStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -37,11 +35,11 @@ public class BasketEntity {
         this.created = DateTime.now();
     }
 
-    public long getBasketId() {
+    public Long getBasketId() {
         return basketId;
     }
 
-    public void setBasketId(long basketId) {
+    public void setBasketId(Long basketId) {
         this.basketId = basketId;
     }
 

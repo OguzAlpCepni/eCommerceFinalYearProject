@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,7 +20,7 @@ public class ItemDto {
 
     private String imageUrl;
     private Long itemsku;
-    private double priceUnit;
+    private BigDecimal priceUnit;
 
     private int quantity;
 

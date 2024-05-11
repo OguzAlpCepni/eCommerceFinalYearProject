@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class ShippingManager implements ShippingService {
     private ShippingRepository shippingRepository;
     private ModelMapperService modelMapperService;
-    private ShippingFeignClient shippingFeignClient;
+
     @Override
     public List<GetAllShippingDto> getAll() {
         log.info(" fetch all profucts in shipping ");

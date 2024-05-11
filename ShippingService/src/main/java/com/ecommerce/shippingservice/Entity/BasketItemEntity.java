@@ -9,13 +9,13 @@ import lombok.Data;
 public class BasketItemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long basketItemId;
+    private Long basketItemId;
 
     @Column(name = "baskedid")
-    private long basketId;
+    private Long basketId;
 
     @OneToOne
-    @Column(name = "iitem")
+    @Column(name = "item")
     private ItemEntity item;
 
     @Column(name = "quantity")
@@ -24,25 +24,25 @@ public class BasketItemEntity {
     public BasketItemEntity() {
     }
 
-    public BasketItemEntity(long basketId, ItemEntity item, int quantity) {
+    public BasketItemEntity(Long basketId, ItemEntity item, int quantity) {
         this.basketId = basketId;
         this.item = item;
         this.quantity = quantity;
     }
 
-    public long getBasketItemId() {
+    public Long getBasketItemId() {
         return basketItemId;
     }
 
-    public void setBasketItemId(long basketItemId) {
+    public void setBasketItemId(Long basketItemId) {
         this.basketItemId = basketItemId;
     }
 
-    public long getBasketId() {
+    public Long getBasketId() {
         return basketId;
     }
 
-    public void setBasketId(long basketId) {
+    public void setBasketId(Long basketId) {
         this.basketId = basketId;
     }
 

@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Table(name="item")
 @Entity
 @Data
@@ -16,10 +18,10 @@ public class ItemEntity {
     @Column(name="itemid")
     private Long itemId;
     @Column(name ="itemsku")
-    private long itemsku;
+    private Long itemsku;
 
     @Column(name="price")
-    private double price;
+    private BigDecimal price;
     @Column(name="quantity")
     private int quantity;
 }
