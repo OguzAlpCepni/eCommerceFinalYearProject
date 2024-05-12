@@ -5,18 +5,22 @@ import com.ecommerce.shippingservice.Entity.BasketItemEntity;
 import com.ecommerce.shippingservice.Entity.ItemEntity;
 import com.ecommerce.shippingservice.core.feignClient.BasketFeignClient;
 import com.ecommerce.shippingservice.core.mappers.ModelMapperService;
-import com.ecommerce.shippingservice.repository.BasketItemRepository;
+import com.ecommerce.shippingservice.core.util.BasketError;
+import com.ecommerce.shippingservice.core.util.BasketStatus;
 import com.ecommerce.shippingservice.repository.BasketRepository;
 import com.ecommerce.shippingservice.service.DTO.ItemDto;
 import com.ecommerce.shippingservice.service.abstracts.BasketService;
 import com.ecommerce.shippingservice.service.helper.HelperBasketManager;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Optional;
 
 @Service
+@Slf4j
 @AllArgsConstructor
 public class BasketManager implements BasketService {
     private BasketRepository basketRepository;
@@ -26,12 +30,24 @@ public class BasketManager implements BasketService {
 
     @Override
     public BasketEntity add(Long basketId, Long itemSku, int itemQuantity) {
+        log.info("1");
         ItemDto itemDto = basketFeignClient.findByItemSku(itemSku);                                                     // ürünü aldım
+        log.info("2");
         helperBasketManager.checkItemDto(itemDto);                                                                      // ürünü alabildim mi kontrolü
+        log.info("3");
         BasketEntity basketEntity = helperBasketManager.getBasket(basketId);                                            // ürün sepette var mı yoksa sepet oluştur
+        log.info("4");
         ItemEntity itemEntity = this.modelMapperService.forRequest().map(itemDto,ItemEntity.class);                     // sepete eklenmesi için gelen ürünü maple
+        log.info("5");
         BasketItemEntity basketItemEntity = new BasketItemEntity(basketEntity.getBasketId(),itemEntity,itemQuantity);// sepetin içine eklenecek olan ürün ve miktarı
+        log.info("6");
         basketEntity=helperBasketManager.checkBasketForSku(basketEntity,basketItemEntity,itemSku,itemQuantity);
+        log.info("7");
+        basketEntity.setBasketStatus(BasketStatus.ACTIVE);
+        log.info("8");
+        log.info("9");
+        basketEntity.setBasketError(new BasketError());
+        log.info("10");
         return basketEntity;
     }
 

@@ -8,6 +8,7 @@ import com.ecommerce.shippingservice.repository.BasketItemRepository;
 import com.ecommerce.shippingservice.repository.BasketRepository;
 import com.ecommerce.shippingservice.service.DTO.ItemDto;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -17,6 +18,7 @@ import java.util.Optional;
 
 
 @Service
+@Slf4j
 @AllArgsConstructor
 public class HelperBasketManager {
     private BasketRepository basketRepository;
@@ -40,14 +42,15 @@ public class HelperBasketManager {
     }
     public BasketEntity checkBasketForSku(BasketEntity basketEntity, BasketItemEntity basketItemEntity, Long itemsku, int quantity){
         if(basketEntity.getBasketItems().stream().anyMatch(i->i.getItem().getItemsku()==itemsku)){
-            basketEntity.getBasketItems().forEach(i->{
-                if(i.getItem().getItemsku()==itemsku){
-                    i.setQuantity(i.getQuantity() + quantity);
-                }
-            });
-        }else {
-            basketEntity.getBasketItems().add((basketItemRepository.save(basketItemEntity)));
-        }
+            log.info("A");
+            basketEntity.getBasketItems().forEach(i->{log.info("A");
+                if(i.getItem().getItemsku()==itemsku){log.info("A");
+                    i.setQuantity(i.getQuantity() + quantity);log.info("A");
+                }log.info("A");
+            });log.info("A");
+        }else {log.info("A");
+            basketEntity.getBasketItems().add((basketItemRepository.save(basketItemEntity)));log.info("A");
+        }log.info("A");
         return basketRepository.save(basketEntity);
     }
     public boolean chechBasketForDelete(Optional<BasketEntity> basketEntity,Long itemSku,int quantity){

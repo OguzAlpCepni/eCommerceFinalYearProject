@@ -26,7 +26,7 @@ public class BasketController {
     ResponseEntity update(@PathVariable Long basketId, @PathVariable Long itemSku, @PathVariable int itemQuantity){
         return ResponseEntity.ok(basketService.update(basketId, itemSku, itemQuantity));
     }
-    @RequestMapping(method = RequestMethod.GET, value = "/total/{basketId}")
+    @RequestMapping(method = RequestMethod.GET, value = "/content/{basketId}")
     ResponseEntity getCOntent(@PathVariable Long basketId){
         return ResponseEntity.ok(basketService.getContent(basketId));
     }

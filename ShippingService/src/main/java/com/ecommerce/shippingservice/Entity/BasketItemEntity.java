@@ -15,7 +15,7 @@ public class BasketItemEntity {
     private Long basketId;
 
     @OneToOne
-    @Column(name = "item")
+    @PrimaryKeyJoinColumn
     private ItemEntity item;
 
     @Column(name = "quantity")

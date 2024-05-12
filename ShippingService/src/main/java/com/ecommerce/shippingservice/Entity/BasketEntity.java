@@ -21,9 +21,6 @@ public class BasketEntity {
     private Collection<BasketItemEntity> basketItems = new ArrayList<>();
     @Column(name = "basketstatus")
     private BasketStatus basketStatus;
-
-    @Column(name = "created")
-    private DateTime created;
     @Column(name = "baskedError")
     private BasketError basketError;
     public BasketEntity() {
@@ -32,7 +29,6 @@ public class BasketEntity {
     public BasketEntity(Collection<BasketItemEntity> basketItems) {
         this.basketItems.addAll(basketItems);
         this.basketStatus = BasketStatus.ACTIVE;
-        this.created = DateTime.now();
     }
 
     public Long getBasketId() {
@@ -57,14 +53,6 @@ public class BasketEntity {
 
     public void setBasketStatus(BasketStatus basketStatus) {
         this.basketStatus = basketStatus;
-    }
-
-    public DateTime getCreated() {
-        return created;
-    }
-
-    public void setCreated(DateTime created) {
-        this.created = created;
     }
 
     public BasketError getBasketError() {
