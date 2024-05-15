@@ -2,7 +2,9 @@ package com.ecommerce.shippingservice.service.helper;
 
 import com.ecommerce.shippingservice.Entity.BasketEntity;
 import com.ecommerce.shippingservice.Entity.BasketItemEntity;
+import com.ecommerce.shippingservice.Entity.ItemEntity;
 import com.ecommerce.shippingservice.core.util.BasketError;
+import com.ecommerce.shippingservice.core.util.BasketStatus;
 import com.ecommerce.shippingservice.core.util.BusinessException;
 import com.ecommerce.shippingservice.repository.BasketItemRepository;
 import com.ecommerce.shippingservice.repository.BasketRepository;
@@ -41,16 +43,30 @@ public class HelperBasketManager {
         return basketEntity;
     }
     public BasketEntity checkBasketForSku(BasketEntity basketEntity, BasketItemEntity basketItemEntity, Long itemsku, int quantity){
-        if(basketEntity.getBasketItems().stream().anyMatch(i->i.getItem().getItemsku()==itemsku)){
-            log.info("A");
-            basketEntity.getBasketItems().forEach(i->{log.info("A");
-                if(i.getItem().getItemsku()==itemsku){log.info("A");
-                    i.setQuantity(i.getQuantity() + quantity);log.info("A");
-                }log.info("A");
-            });log.info("A");
-        }else {log.info("A");
-            basketEntity.getBasketItems().add((basketItemRepository.save(basketItemEntity)));log.info("A");
-        }log.info("A");
+        boolean itemExists = false;
+
+        for (BasketItemEntity i : basketEntity.getBasketItems()) {
+            ItemEntity item = i.getItem();
+            if (item != null && item.getItemsku().equals(itemsku)) {
+                itemExists = true;
+                break;
+            }
+        }
+
+        if (itemExists) {
+            log.info("a");
+            for (BasketItemEntity i : basketEntity.getBasketItems()) {
+                ItemEntity item = i.getItem();
+                if (item != null && item.getItemsku().equals(itemsku)) {
+                    log.info("b");
+                    i.setQuantity(i.getQuantity() + quantity);
+                }
+            }
+        } else {
+            basketEntity.getBasketItems().add((basketItemRepository.save(basketItemEntity)));
+        }
+
+        basketEntity.setBasketStatus(BasketStatus.ACTIVE);
         return basketRepository.save(basketEntity);
     }
     public boolean chechBasketForDelete(Optional<BasketEntity> basketEntity,Long itemSku,int quantity){

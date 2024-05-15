@@ -5,15 +5,14 @@ import com.ecommerce.shippingservice.Entity.BasketItemEntity;
 import com.ecommerce.shippingservice.Entity.ItemEntity;
 import com.ecommerce.shippingservice.core.feignClient.BasketFeignClient;
 import com.ecommerce.shippingservice.core.mappers.ModelMapperService;
-import com.ecommerce.shippingservice.core.util.BasketError;
 import com.ecommerce.shippingservice.core.util.BasketStatus;
 import com.ecommerce.shippingservice.repository.BasketRepository;
+import com.ecommerce.shippingservice.repository.ItemRepository;
 import com.ecommerce.shippingservice.service.DTO.ItemDto;
 import com.ecommerce.shippingservice.service.abstracts.BasketService;
 import com.ecommerce.shippingservice.service.helper.HelperBasketManager;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -27,6 +26,7 @@ public class BasketManager implements BasketService {
     private BasketFeignClient basketFeignClient;
     private HelperBasketManager helperBasketManager;
     private ModelMapperService modelMapperService;
+    private ItemRepository itemRepository;
 
     @Override
     public BasketEntity add(Long basketId, Long itemSku, int itemQuantity) {
@@ -39,15 +39,11 @@ public class BasketManager implements BasketService {
         log.info("4");
         ItemEntity itemEntity = this.modelMapperService.forRequest().map(itemDto,ItemEntity.class);                     // sepete eklenmesi için gelen ürünü maple
         log.info("5");
+        itemRepository.save(itemEntity);
         BasketItemEntity basketItemEntity = new BasketItemEntity(basketEntity.getBasketId(),itemEntity,itemQuantity);// sepetin içine eklenecek olan ürün ve miktarı
         log.info("6");
         basketEntity=helperBasketManager.checkBasketForSku(basketEntity,basketItemEntity,itemSku,itemQuantity);
         log.info("7");
-        basketEntity.setBasketStatus(BasketStatus.ACTIVE);
-        log.info("8");
-        log.info("9");
-        basketEntity.setBasketError(new BasketError());
-        log.info("10");
         return basketEntity;
     }
 
