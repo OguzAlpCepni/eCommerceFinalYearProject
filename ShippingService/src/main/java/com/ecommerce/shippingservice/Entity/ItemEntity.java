@@ -16,12 +16,12 @@ public class ItemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="itemid")
-    private Long itemId;
+    private Long productId;
+
     @Column(name ="itemsku")
     private Long itemsku;
 
     @Column(name="price")
-    private BigDecimal price;
-    @Column(name="quantity")
-    private int quantity;
+    private BigDecimal priceUnit;
+
 }

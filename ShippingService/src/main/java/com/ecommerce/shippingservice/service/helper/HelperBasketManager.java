@@ -2,7 +2,6 @@ package com.ecommerce.shippingservice.service.helper;
 
 import com.ecommerce.shippingservice.Entity.BasketEntity;
 import com.ecommerce.shippingservice.Entity.BasketItemEntity;
-import com.ecommerce.shippingservice.Entity.ItemEntity;
 import com.ecommerce.shippingservice.core.util.BasketError;
 import com.ecommerce.shippingservice.core.util.BasketStatus;
 import com.ecommerce.shippingservice.core.util.BusinessException;
@@ -43,36 +42,22 @@ public class HelperBasketManager {
         return basketEntity;
     }
     public BasketEntity checkBasketForSku(BasketEntity basketEntity, BasketItemEntity basketItemEntity, Long itemsku, int quantity){
-        boolean itemExists = false;
-
-        for (BasketItemEntity i : basketEntity.getBasketItems()) {
-            ItemEntity item = i.getItem();
-            if (item != null && item.getItemsku().equals(itemsku)) {
-                itemExists = true;
-                break;
-            }
-        }
-
-        if (itemExists) {
-            log.info("a");
-            for (BasketItemEntity i : basketEntity.getBasketItems()) {
-                ItemEntity item = i.getItem();
-                if (item != null && item.getItemsku().equals(itemsku)) {
-                    log.info("b");
+        if (basketEntity.getBasketItems().stream().anyMatch(i -> i.getItem().getItemsku().equals(itemsku))) {
+            basketEntity.getBasketItems().forEach(i -> {
+                if (i.getItem().getItemsku().equals(itemsku)) {
                     i.setQuantity(i.getQuantity() + quantity);
                 }
-            }
+            });
         } else {
-            basketEntity.getBasketItems().add((basketItemRepository.save(basketItemEntity)));
+            basketEntity.getBasketItems().add(basketItemRepository.save(basketItemEntity));
         }
-
         basketEntity.setBasketStatus(BasketStatus.ACTIVE);
         return basketRepository.save(basketEntity);
     }
     public boolean chechBasketForDelete(Optional<BasketEntity> basketEntity,Long itemSku,int quantity){
         if(basketEntity.isPresent()){
             basketEntity.get().getBasketItems().forEach(item->{
-                if(item.getItem().getItemsku()==itemSku&&item.getQuantity()>=quantity){
+                if(item.getItem().getItemsku().equals(itemSku)&&item.getQuantity()>=quantity){
                     basketEntity.get().getBasketItems().remove(item);
                     basketItemRepository.deleteById(item.getBasketId());
                 }else {
@@ -89,7 +74,7 @@ public class HelperBasketManager {
     public BasketEntity updateForBasket(Optional<BasketEntity> basketEntity,Long itemsku,int quantity,Long basketId){
         if (basketEntity.isPresent()){
             basketEntity.get().getBasketItems().forEach(item->{
-                if(item.getItem().getItemsku()==itemsku){
+                if(item.getItem().getItemsku().equals(itemsku)){
                     item.setQuantity(quantity);
                 }
             });
@@ -103,7 +88,7 @@ public class HelperBasketManager {
     }
     public BigDecimal getBasketPrice(BasketEntity basketEntity){
         List<BigDecimal> values = new ArrayList<>();
-        basketEntity.getBasketItems().forEach(val->values.add(val.getItem().getPrice().multiply(new BigDecimal(val.getQuantity()))));
+        basketEntity.getBasketItems().forEach(val->values.add(val.getItem().getPriceUnit().multiply(new BigDecimal(val.getQuantity()))));
         BigDecimal sumOfValues = values.stream().reduce(BigDecimal.ZERO,BigDecimal::add);
         return sumOfValues;
     }
