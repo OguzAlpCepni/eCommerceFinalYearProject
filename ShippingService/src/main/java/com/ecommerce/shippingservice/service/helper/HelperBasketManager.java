@@ -59,7 +59,7 @@ public class HelperBasketManager {
             basketEntity.get().getBasketItems().forEach(item->{
                 if(item.getItem().getItemsku().equals(itemSku)&&item.getQuantity()>=quantity){
                     basketEntity.get().getBasketItems().remove(item);
-                    basketItemRepository.deleteById(item.getBasketId());
+                    basketItemRepository.delete(item);
                 }else {
                     item.setQuantity(item.getQuantity()-quantity);
                     basketItemRepository.save(item);

@@ -8,7 +8,6 @@ import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 
 @Entity
 @Table(name="basket")
@@ -19,7 +18,7 @@ public class BasketEntity {
     @Column(name = "basketid")
     private Long basketId;
     @OneToMany
-    private Collection<BasketItemEntity> basketItems = new HashSet<>();
+    private Collection<BasketItemEntity> basketItems = new ArrayList<>();
     @Column(name = "basketstatus")
     private BasketStatus basketStatus;
     @Column(name = "baskedError")

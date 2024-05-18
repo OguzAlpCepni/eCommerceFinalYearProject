@@ -6,6 +6,7 @@ import com.ecommerce.shippingservice.Entity.ItemEntity;
 import com.ecommerce.shippingservice.core.feignClient.BasketFeignClient;
 import com.ecommerce.shippingservice.core.mappers.ModelMapperService;
 import com.ecommerce.shippingservice.core.util.BasketStatus;
+import com.ecommerce.shippingservice.repository.BasketItemRepository;
 import com.ecommerce.shippingservice.repository.BasketRepository;
 import com.ecommerce.shippingservice.repository.ItemRepository;
 import com.ecommerce.shippingservice.service.DTO.ItemDto;
@@ -27,6 +28,7 @@ public class BasketManager implements BasketService {
     private HelperBasketManager helperBasketManager;
     private ModelMapperService modelMapperService;
     private ItemRepository itemRepository;
+    private BasketItemRepository basketItemRepository;
 
     @Override
     public BasketEntity add(Long basketId, Long itemSku, int itemQuantity) {
@@ -54,7 +56,20 @@ public class BasketManager implements BasketService {
     @Override
     public boolean delete(Long basketId, Long itemSku, int itemQuantity) {
         Optional<BasketEntity> basketEntity = basketRepository.findOneByBasketId(basketId);
-        return helperBasketManager.chechBasketForDelete(basketEntity,itemSku,itemQuantity);
+        if(basketEntity.isPresent()){
+            basketEntity.get().getBasketItems().forEach(item->{
+                if(item.getItem().getItemsku().equals(itemSku)&&item.getQuantity()>=itemQuantity){
+                    basketEntity.get().getBasketItems().remove(item);
+                    basketItemRepository.delete(item);
+                }else {
+                    item.setQuantity(item.getQuantity()-itemQuantity);
+                    basketItemRepository.save(item);
+                }
+            });
+            return true;
+        }else {
+            return false;
+        }
     }
 
     @Override
