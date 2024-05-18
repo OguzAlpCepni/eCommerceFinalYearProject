@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="EurekaServer-Registry" />
         <module name="ShippingService" />
+        <module name="OrderService" />
         <module name="AuthenticationService" />
         <module name="APIGATEWAY" />
         <module name="ProductService" />
@@ -18,6 +19,7 @@
       <module name="AuthenticationService" target="17" />
       <module name="EurekaServer-Registry" target="17" />
       <module name="klmnksa" target="17" />
+      <module name="OrderService" target="17" />
       <module name="ProductService" target="17" />
       <module name="ShippingService" target="17" />
     </bytecodeTargetLevel>
@@ -27,6 +29,7 @@
       <module name="APIGATEWAY" options="-parameters" />
       <module name="AuthenticationService" options="-parameters" />
       <module name="EurekaServer-Registry" options="-parameters" />
+      <module name="OrderService" options="-parameters" />
       <module name="ProductService" options="-parameters" />
       <module name="ShippingService" options="-parameters" />
       <module name="klmnksa" options="-parameters" />
