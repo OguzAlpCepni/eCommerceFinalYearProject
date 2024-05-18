@@ -18,9 +18,17 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "orderid")
     private Long OrderId;
-
+    @Column(name = "baskedid")
     private Long basketId;
+    @Column(name = "itemprice")
     private BigDecimal itemPrice;
+    @Column(name=" quantity")
+    private int quantity;
+    @Column
+    private String username;
+    @Column(name = "address")
+    private String address;
+    @Column(name = "orderstatus")
     private OrderStatus orderStatus;
 
 }

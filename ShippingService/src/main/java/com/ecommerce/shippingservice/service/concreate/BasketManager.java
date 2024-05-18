@@ -30,20 +30,13 @@ public class BasketManager implements BasketService {
 
     @Override
     public BasketEntity add(Long basketId, Long itemSku, int itemQuantity) {
-        log.info("1");
         ItemDto itemDto = basketFeignClient.findByItemSku(itemSku);                                                     // ürünü aldım
-        log.info("2");
         helperBasketManager.checkItemDto(itemDto);                                                                      // ürünü alabildim mi kontrolü
-        log.info("3");
         BasketEntity basketEntity = helperBasketManager.getBasket(basketId);                                            // ürün sepette var mı yoksa sepet oluştur
-        log.info("4");
         ItemEntity itemEntity = this.modelMapperService.forRequest().map(itemDto,ItemEntity.class);                     // sepete eklenmesi için gelen ürünü maple
-        log.info("5");
         itemRepository.save(itemEntity);
         BasketItemEntity basketItemEntity = new BasketItemEntity(basketEntity.getBasketId(),itemEntity,itemQuantity);// sepetin içine eklenecek olan ürün ve miktarı
-        log.info("6");
         basketEntity=helperBasketManager.checkBasketForSku(basketEntity,basketItemEntity,itemSku,itemQuantity);
-        log.info("7");
         return basketEntity;
     }
 
