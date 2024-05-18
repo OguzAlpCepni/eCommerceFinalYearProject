@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.HashMap;
-
 @EnableDiscoveryClient
 @RestControllerAdvice
 @SpringBootApplication

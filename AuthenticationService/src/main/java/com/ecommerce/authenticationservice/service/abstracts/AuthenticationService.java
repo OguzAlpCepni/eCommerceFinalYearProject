@@ -10,5 +10,5 @@ public interface AuthenticationService {
 
     public void validateToken(String token);
 
-
+    UserDTO getById(Long id);
 }

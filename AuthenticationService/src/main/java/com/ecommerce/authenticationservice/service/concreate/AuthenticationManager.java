@@ -10,6 +10,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class AuthenticationManager implements AuthenticationService {
@@ -35,5 +37,12 @@ public class AuthenticationManager implements AuthenticationService {
     @Override
     public void validateToken(String token) {
         jwtService.validateToken(token);
+    }
+
+    @Override
+    public UserDTO getById(Long id) {
+        User user = this.userRepository.findById(id).orElseThrow();
+        UserDTO userDTO = this.modelMapperService.forResponse().map(user,UserDTO.class);
+        return userDTO;
     }
 }

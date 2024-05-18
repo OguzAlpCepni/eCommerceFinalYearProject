@@ -1,6 +1,6 @@
 package com.ecommerce.authenticationservice.controller;
 
-import com.ecommerce.authenticationservice.entity.User;
+
 import com.ecommerce.authenticationservice.service.DTO.AuthRequest;
 import com.ecommerce.authenticationservice.service.DTO.UserDTO;
 import com.ecommerce.authenticationservice.service.abstracts.AuthenticationService;
@@ -8,7 +8,7 @@ import com.ecommerce.authenticationservice.service.rules.AuthenticationRules;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -45,6 +45,10 @@ public class AuthController {
         authenticationService.validateToken(token);
         return ResponseEntity.ok("Token is valid");
 
+    }
+    @GetMapping("/getbyid")
+    public ResponseEntity getByIdForUser(@PathVariable ("{getbyid}") Long id){
+        return ResponseEntity.ok(authenticationService.getById(id));
     }
 
 

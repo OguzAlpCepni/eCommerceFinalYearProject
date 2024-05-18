@@ -9,15 +9,14 @@ import orderservice.orderservice.core.enums.OrderStatus;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "orderid")
-    private Long OrderId;
+    private String OrderId;
     @Column(name = "baskedid")
     private Long basketId;
     @Column(name = "itemprice")
@@ -26,8 +25,6 @@ public class Order {
     private int quantity;
     @Column
     private String username;
-    @Column(name = "address")
-    private String address;
     @Column(name = "orderstatus")
     private OrderStatus orderStatus;
 
