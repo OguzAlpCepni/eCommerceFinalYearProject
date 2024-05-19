@@ -6,10 +6,13 @@ import orderservice.orderservice.core.Dtos.UserDto;
 import orderservice.orderservice.core.enums.OrderStatus;
 import orderservice.orderservice.core.feignClient.OrderFeignClient;
 import orderservice.orderservice.model.Order;
+import orderservice.orderservice.model.OrderItems;
 import orderservice.orderservice.repository.OrderRepository;
 import orderservice.orderservice.service.abstracts.OrderService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -23,17 +26,27 @@ public class OrderManager implements OrderService {
     public Order createOrder(Long basketId,Long userId) {
         String orderId = UUID.randomUUID().toString();
         Order order =new Order();
+
+        List<OrderItems> orderItems = new ArrayList<>();
         BasketDto basketDto = orderFeignClient.getCOntent(basketId);
+        order.setBasketId(basketDto.getBasketId());
+        order.setOrderId(orderId);
+        order.setOrderStatus(OrderStatus.Active);
         basketDto.getBasketItems().stream().forEachOrdered(basketItemDto -> {
-            order.setBasketId(basketItemDto.getBasketId());
-            order.setQuantity(basketItemDto.getQuantity());
+            OrderItems orderItem = new OrderItems();
+            orderItem.setOrder(order);
+            orderItem.setOrderItemId(basketItemDto.getItem().getProductId());
+            orderItem.setProductTitle(basketItemDto.getItem().getProductTitle());
+            orderItem.setItemsku(basketItemDto.getItem().getItemsku());
+            orderItem.setQuantity(basketItemDto.getQuantity());
+            orderItem.setPriceUnit(basketItemDto.getItem().getPriceUnit());
+            orderItems.add(orderItem);
+
         });
         //UserDto userDto = orderfeignClientAuthentication.getByIdForUser(userId);
         //order.setUsername(userDto.getName());
-        order.setOrderId(orderId);
+        order.setOrderItems(orderItems);
         order.setItemPrice(orderFeignClient.getTotal(basketId));
-        order.setOrderStatus(OrderStatus.Active);
-        orderRepository.save(order);
-        return order;
+        return orderRepository.save(order);
     }
 }

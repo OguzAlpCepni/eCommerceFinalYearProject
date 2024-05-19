@@ -1,5 +1,6 @@
 package orderservice.orderservice.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import orderservice.orderservice.core.enums.OrderStatus;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -27,5 +29,8 @@ public class Order {
     private String username;
     @Column(name = "orderstatus")
     private OrderStatus orderStatus;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<OrderItems> orderItems;
 
 }
