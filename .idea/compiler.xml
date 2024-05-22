@@ -13,6 +13,7 @@
         <module name="OrderService" />
         <module name="AuthenticationService" />
         <module name="APIGATEWAY" />
+        <module name="PaymentService" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -22,6 +23,7 @@
       <module name="klmnksa" target="17" />
       <module name="orchestrator-service" target="17" />
       <module name="OrderService" target="17" />
+      <module name="PaymentService" target="17" />
       <module name="ProductService" target="17" />
       <module name="ShippingService" target="17" />
     </bytecodeTargetLevel>
@@ -32,6 +34,7 @@
       <module name="AuthenticationService" options="-parameters" />
       <module name="EurekaServer-Registry" options="-parameters" />
       <module name="OrderService" options="-parameters" />
+      <module name="PaymentService" options="-parameters" />
       <module name="ProductService" options="-parameters" />
       <module name="ShippingService" options="-parameters" />
       <module name="klmnksa" options="-parameters" />

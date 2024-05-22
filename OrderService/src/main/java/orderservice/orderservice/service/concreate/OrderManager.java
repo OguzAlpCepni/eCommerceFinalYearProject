@@ -39,6 +39,7 @@ public class OrderManager implements OrderService {
         BasketDto basketDto = orderFeignClient.getCOntent(basketId);
         order.setBasketId(basketDto.getBasketId());
         order.setOrderId(orderId);
+        order.setUserId(userId);
         order.setOrderStatus(OrderStatus.Active);
         basketDto.getBasketItems().stream().forEachOrdered(basketItemDto -> {
             OrderItems orderItem = new OrderItems();

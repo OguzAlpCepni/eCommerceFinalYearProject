@@ -25,8 +25,8 @@ public class Order {
     private BigDecimal itemPrice;
     @Column(name=" quantity")
     private int quantity;
-    @Column
-    private String username;
+    @Column(name="userid")
+    private Long userId;
     @Column(name = "orderstatus")
     private OrderStatus orderStatus;
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)

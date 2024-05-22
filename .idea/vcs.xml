@@ -4,6 +4,7 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/AuthenticationService" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/OrderService" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/PaymentService" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/ProductService" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/ShippingService" vcs="Git" />
   </component>
