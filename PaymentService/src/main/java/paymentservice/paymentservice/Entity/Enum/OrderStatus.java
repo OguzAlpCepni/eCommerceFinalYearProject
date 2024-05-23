@@ -1,5 +1,5 @@
 package paymentservice.paymentservice.Entity.Enum;
 
 public enum OrderStatus {
-    Active,disable;
+    Active,Disable,Paid;
 }

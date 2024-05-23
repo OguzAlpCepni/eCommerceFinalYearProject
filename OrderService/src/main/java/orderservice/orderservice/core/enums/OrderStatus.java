@@ -1,5 +1,5 @@
 package orderservice.orderservice.core.enums;
 
 public enum OrderStatus {
-    Active,disable;
+    Active,disable,paid
 }

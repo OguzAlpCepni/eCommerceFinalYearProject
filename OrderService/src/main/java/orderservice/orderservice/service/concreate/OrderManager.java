@@ -1,6 +1,7 @@
 package orderservice.orderservice.service.concreate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import orderservice.orderservice.core.Dtos.BasketDto;
@@ -11,6 +12,7 @@ import orderservice.orderservice.model.Order;
 import orderservice.orderservice.model.OrderItems;
 import orderservice.orderservice.repository.OrderRepository;
 import orderservice.orderservice.service.abstracts.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -19,22 +21,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@AllArgsConstructor
+
 @Service
 public class OrderManager implements OrderService {
+    @Autowired
     private OrderFeignClient orderFeignClient;
     //private OrderfeignClientAuthentication orderfeignClientAuthentication;
-    private final OrderRepository orderRepository;
+    @Autowired
+    private  OrderRepository orderRepository;
+    @Autowired
     private KafkaTemplate<String,String> kafkaTemplate;
     @Value("${order.topic.name}")
     private String topicName;
+
     ObjectMapper om = new ObjectMapper();
 
     @Override
     public Order createOrder(Long basketId,Long userId) {
         String orderId = UUID.randomUUID().toString();
         Order order =new Order();
-
         List<OrderItems> orderItems = new ArrayList<>();
         BasketDto basketDto = orderFeignClient.getCOntent(basketId);
         order.setBasketId(basketDto.getBasketId());
@@ -63,6 +68,7 @@ public class OrderManager implements OrderService {
             e.printStackTrace();
         }
         kafkaTemplate.send(topicName,message);
+        kafkaTemplate.send()
         return orderRepository.save(order);
     }
 

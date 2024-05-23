@@ -23,8 +23,6 @@ public class Order {
     private Long basketId;
     @Column(name = "itemprice")
     private BigDecimal itemPrice;
-    @Column(name=" quantity")
-    private int quantity;
     @Column(name="userid")
     private Long userId;
     @Column(name = "orderstatus")

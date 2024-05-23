@@ -1,5 +1,6 @@
 package paymentservice.paymentservice.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,16 +14,19 @@ import java.math.BigDecimal;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PaymentEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "paymnetid")
-    private Long paymentId;
-    @Column(name = "orderamount")
-    private BigDecimal orderAmount;
+    private String OrderId;
+    @Column(name = "basketid")
+    private Long basketId;
+    @Column(name = "itemprice")
+    private BigDecimal itemPrice;
     @Column(name="userid")
     private Long userId;
+
     @Column(name = "orderstatus")
     private OrderStatus orderStatus;
 
