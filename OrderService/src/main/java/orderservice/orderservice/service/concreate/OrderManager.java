@@ -33,7 +33,8 @@ public class OrderManager implements OrderService {
     private KafkaTemplate<String,String> kafkaTemplate;
     @Value("${order.topic.name}")
     private String topicName;
-
+    @Value("inventory-order-topic")
+    private String inventoryOrderTopic;
     ObjectMapper om = new ObjectMapper();
 
     @Override
@@ -68,7 +69,7 @@ public class OrderManager implements OrderService {
             e.printStackTrace();
         }
         kafkaTemplate.send(topicName,message);
-        kafkaTemplate.send()
+        kafkaTemplate.send(inventoryOrderTopic,message);
         return orderRepository.save(order);
     }
 
