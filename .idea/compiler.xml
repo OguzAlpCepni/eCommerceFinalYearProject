@@ -9,9 +9,9 @@
         <module name="EurekaServer-Registry" />
         <module name="ProductService" />
         <module name="ShippingService" />
-        <module name="orchestrator-service" />
         <module name="OrderService" />
         <module name="AuthenticationService" />
+        <module name="StockService" />
         <module name="APIGATEWAY" />
         <module name="PaymentService" />
       </profile>
@@ -26,6 +26,7 @@
       <module name="PaymentService" target="17" />
       <module name="ProductService" target="17" />
       <module name="ShippingService" target="17" />
+      <module name="StockService" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -37,6 +38,7 @@
       <module name="PaymentService" options="-parameters" />
       <module name="ProductService" options="-parameters" />
       <module name="ShippingService" options="-parameters" />
+      <module name="StockService" options="-parameters" />
       <module name="klmnksa" options="-parameters" />
       <module name="orchestrator-service" options="-parameters" />
     </option>

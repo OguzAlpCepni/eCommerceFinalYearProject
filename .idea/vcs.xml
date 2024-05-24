@@ -7,5 +7,6 @@
     <mapping directory="$PROJECT_DIR$/PaymentService" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/ProductService" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/ShippingService" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/StockService" vcs="Git" />
   </component>
 </project>
