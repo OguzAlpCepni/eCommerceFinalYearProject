@@ -37,7 +37,11 @@ public class StockManager implements StockService {
         }
         order.getOrderItems().forEach(orderItem -> {
             ItemDto itemDto = stockFeignClient.findByItemSku(orderItem.getItemsku());
+            if(itemDto.getQuantity() >= orderItem.getQuantity()){
+                int proccesQunatity = itemDto.getQuantity() - orderItem.getQuantity();
 
+
+            }
         });
 
 
