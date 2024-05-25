@@ -33,7 +33,7 @@ public class OrderManager implements OrderService {
     private KafkaTemplate<String,String> kafkaTemplate;
     @Value("${order.topic.name}")
     private String topicName;
-    @Value("inventory-order-topic")
+    @Value("${inventory.topic.name}")
     private String inventoryOrderTopic;
     ObjectMapper om = new ObjectMapper();
 

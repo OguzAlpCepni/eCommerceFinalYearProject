@@ -19,7 +19,8 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class PaymentManager implements PaymentService {
-
+    @Value("${order.topic.name}")
+    private String topicName;
     private  PaymentRepository paymentRepository;
     private UserCardRepository userCardRepository;
 
@@ -31,21 +32,21 @@ public class PaymentManager implements PaymentService {
         PaymentEntity paymentEntity = null;
         try{
             paymentEntity = objectMapper.readValue(message,PaymentEntity.class);
-            UserCard userCard = userCardRepository.findById(paymentEntity.getUserId()).orElseThrow();
-            if(userCard.getAmount().compareTo(paymentEntity.getItemPrice())>=0){
-                userCard.setAmount(userCard.getAmount().subtract(paymentEntity.getItemPrice()));
-                paymentEntity.setOrderStatus(OrderStatus.Paid);
-                userCardRepository.save(userCard);
-                paymentRepository.save(paymentEntity);
 
-            }else {
-                paymentEntity.setOrderStatus(OrderStatus.Disable);
-                paymentRepository.save(paymentEntity);
-            }
         }catch (JsonProcessingException e){
             e.printStackTrace();
         }
+        UserCard userCard = userCardRepository.findById(paymentEntity.getUserId()).orElseThrow();
+        if(userCard.getAmount().compareTo(paymentEntity.getItemPrice())>=0){
+            userCard.setAmount(userCard.getAmount().subtract(paymentEntity.getItemPrice()));
+            paymentEntity.setOrderStatus(OrderStatus.Paid);
+            userCardRepository.save(userCard);
+            paymentRepository.save(paymentEntity);
 
+        }else {
+            paymentEntity.setOrderStatus(OrderStatus.Disable);
+            paymentRepository.save(paymentEntity);
+        }
 
     }
 }
