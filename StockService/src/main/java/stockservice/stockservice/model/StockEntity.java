@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import stockservice.stockservice.core.enums.OrderStatus;
+
 @Entity
 @Table(name = "stock")
 @Data
@@ -16,4 +18,7 @@ public class StockEntity {
     private Long id;
     @Column(name = "quantity")
     private int quantity;
+
+    @Column(name= "orderstatus")
+    private OrderStatus orderStatus;
 }

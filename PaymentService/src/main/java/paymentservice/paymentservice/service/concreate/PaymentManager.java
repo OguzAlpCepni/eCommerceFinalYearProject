@@ -19,8 +19,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class PaymentManager implements PaymentService {
-    @Value("${order.topic.name}")
-    private String topicName;
+
     private  PaymentRepository paymentRepository;
     private UserCardRepository userCardRepository;
 

@@ -64,5 +64,10 @@ public class ProductController {
         ProductDto productDto = this.productService.findByItemSku(itemsku);
         return ResponseEntity.ok(productDto);
     }
+    @RequestMapping(method = RequestMethod.PUT,value = "/updateToSku/{itemsku}")
+    public ResponseEntity updateToSku(@PathVariable Long itemsku,@RequestBody UpdateProductDto updateProductDto){
+        this.productService.updateToSku(itemsku,updateProductDto);
+        return ResponseEntity.ok("update qunatity for sku");
+    }
 
 }

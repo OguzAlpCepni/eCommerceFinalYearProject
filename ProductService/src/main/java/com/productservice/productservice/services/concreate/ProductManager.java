@@ -83,4 +83,11 @@ public class ProductManager implements ProductService {
         ProductDto productDto = this.modelMapperService.forResponse().map(productEntity,ProductDto.class);
         return productDto;
     }
+
+    @Override
+    public void updateToSku(Long itemku, UpdateProductDto updateProductDto) {
+        ProductEntity productEntity = this.productRepository.findByitemsku(itemku).orElseThrow();
+        productEntity.setQuantity(updateProductDto.getQuantity());
+        productRepository.save(productEntity);
+    }
 }
