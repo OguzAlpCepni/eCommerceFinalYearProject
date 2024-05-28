@@ -17,9 +17,6 @@ public class PaymentController {
     private PaymentService paymentService;
     private UserCardService userCardService;
 
-
-
-
     @PostMapping
     public ResponseEntity addCard(@RequestBody UserCard userCard){
         userCardService.add(userCard);

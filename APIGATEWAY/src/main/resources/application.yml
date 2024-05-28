@@ -24,6 +24,26 @@ spring:
             - Path=/category/**
           filters:
             - AuthenticationFilter
+        - id: ShippingService
+          uri: lb://ShippingService
+          predicates:
+            - Path=/basket/**
+          filters:
+            - AuthenticationFilter
+
+        - id: OrderService
+          uri: lb://OrderService
+          predicates:
+            - Path=/order/**
+          filters:
+            - AuthenticationFilter
+
+        - id: PaymentService
+          uri: lb://PaymentService
+          predicates:
+            - Path=/payment/**
+          filters:
+            - AuthenticationFilter
 server:
   port: 8083
 
